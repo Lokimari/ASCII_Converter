@@ -39,17 +39,27 @@ if __name__ == "__main__":
 
         # Start converting
         with open("ascii.txt", "w") as f:
-            i = 1
+            DIAGONAL_OFFSET = 0  # Position for down/right offset, negative for down/left offset
             for pixel in data:
                 lofpixels.extend(pixel)
                 pixel_brightness = get_pixel_brightness(pixel)
                 # print(pixel_brightness)
-                f.write(PADDING + light_levels[pixel_brightness])
-                i += 1
+
+                if pixel_brightness >= len(light_levels):
+                    pixel_brightness = len(light_levels) - 1
+                elif pixel_brightness < 0:
+                    pixel_brightness = 0
+                try:
+                    f.write(PADDING + light_levels[pixel_brightness])
+                except IndexError:
+                    print(pixel_brightness)
+                    pause = input("Pause: ")
+
+                DIAGONAL_OFFSET += 1  # This is now acting as 'i'
                 # Newline if at width limit
-                if i == imgobj.width:
+                if DIAGONAL_OFFSET == imgobj.width:
                     f.write(" \n")
-                    i = 1
+                    DIAGONAL_OFFSET = 0
             f.close()
 
         end = datetime.now().now()
