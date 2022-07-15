@@ -8,6 +8,7 @@ from PIL import Image
 import easygui
 
 light_levels = [char for char in ".,':;^*!([%#"]  # Change this as you wish
+INVERSE_SHADING = True
 
 
 def get_pixel_brightness(pixel):
@@ -49,6 +50,10 @@ if __name__ == "__main__":
                     pixel_brightness = len(light_levels) - 1
                 elif pixel_brightness < 0:
                     pixel_brightness = 0
+
+                if INVERSE_SHADING:
+                    pixel_brightness = (pixel_brightness * -1) - 1
+
                 try:
                     f.write(PADDING + light_levels[pixel_brightness])
                 except IndexError:
