@@ -4,8 +4,6 @@
 
 # TODO:
 #  Make TKInter selection menu:
-#  start button
-#  open folder
 #  set destination
 #  settings
 #  finalize
@@ -13,18 +11,14 @@
 #  exe
 
 from select_file import select_file
-
 import tkinter as tk
-from tkinter import ttk
-
-
 import subprocess as sp
 
 
 def open_ascii_file():
-    programName = "notepad.exe"
-    fileName = "ascii.txt"
-    sp.Popen([programName, fileName])
+    notepad = "notepad.exe"
+    ascii = "ascii.txt"
+    sp.Popen([notepad, ascii])
 
 
 def toggle_inverse_shading():
@@ -34,8 +28,6 @@ def toggle_inverse_shading():
 def init_ASCII_TKInter():
     # TKInter settings
     root = tk.Tk()
-    # root.geometry('680x340')
-    # root.resizable(False, False)
     frame = tk.Frame(root)
     frame.pack()
 
@@ -74,7 +66,6 @@ def init_ASCII_TKInter():
     invert_button.pack()
 
     root.mainloop()
-
 
 
 def main():
